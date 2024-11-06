@@ -4,7 +4,7 @@ import ColorSwitch from "./ColorSwitch";
 import LightSwitch from "./LightSwitch";
 import { useState } from 'react';
 
-export default function Home() {
+export default function Home( ) {
   const [clicks, setClicks] = useState(0);
 
   function handleClickOutside() {
@@ -19,6 +19,7 @@ export default function Home() {
   }
 
   function handleChangeColor() {
+    
     let bodyStyle = document.body.style;
     bodyStyle.backgroundColor = getRandomLightColor();
   }
@@ -26,11 +27,13 @@ export default function Home() {
   return (
     <div>
       <div>
-        <LightSwitch />
+        <LightSwitch onClick/>
       </div>
-      <div onClick={handleClickOutside}>
-        <ColorSwitch  onChangeColor={handleChangeColor} />
-        <br />
+      <div onClick={detener => {
+        detener.stopPropagation();
+        handleClickOutside}}>
+        <ColorSwitch onChangeColor={handleChangeColor} />
+        <br />  
       <br />
       <h2>Clics en la página: {clicks}</h2>
       </div>
